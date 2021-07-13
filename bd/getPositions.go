@@ -10,15 +10,15 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-//GetCampaigns devuelve el listado de campañas activas
-func GetCampaigns(page int64, search string) ([]*model.Campaign, bool) {
+//GetPositions devuelve el listado de los perfiles activos
+func GetPositions(page int64, search string) ([]*model.Positions, bool) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
 	db := MongoCN.Database("admsys")
-	col := db.Collection("campaigns")
+	col := db.Collection("positions")
 
-	var results []*model.Campaign
+	var results []*model.Positions
 
 	findOptions := options.Find()
 	findOptions.SetSkip((page - 1) * 10)
@@ -37,7 +37,7 @@ func GetCampaigns(page int64, search string) ([]*model.Campaign, bool) {
 	}
 
 	for cur.Next(ctx) {
-		var s model.Campaign
+		var s model.Positions
 
 		err := cur.Decode(&s)
 

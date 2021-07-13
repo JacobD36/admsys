@@ -23,6 +23,11 @@ func BackendHandlers() {
 	router.HandleFunc("/login", middlew.CheckDB(routers.Login)).Methods("POST")
 	router.HandleFunc("/getCampaigns", middlew.CheckDB(middlew.CheckJWT(routers.ListCampaign))).Methods("GET")
 	router.HandleFunc("/newCampaign", middlew.CheckDB(middlew.CheckJWT(routers.CreateCampaign))).Methods("POST")
+	router.HandleFunc("/newProfile", middlew.CheckDB(middlew.CheckJWT(routers.CreateProfile))).Methods("POST")
+	router.HandleFunc("/getProfiles", middlew.CheckDB(middlew.CheckJWT(routers.ListProfiles))).Methods("GET")
+	router.HandleFunc("/seekProfile", middlew.CheckDB(middlew.CheckJWT(routers.SeekDBProfile))).Methods("GET")
+	router.HandleFunc("/newPosition", middlew.CheckDB(middlew.CheckJWT(routers.CreatePosition))).Methods("POST")
+	router.HandleFunc("/getPositions", middlew.CheckDB(middlew.CheckJWT(routers.ListPositions))).Methods("GET")
 
 	PORT := os.Getenv("PORT")
 
